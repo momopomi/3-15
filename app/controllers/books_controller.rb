@@ -14,7 +14,7 @@ class BooksController < ApplicationController
     # 2. データをデータベースに保存するためのsaveメソッド実行
     if @book.save
       # 3. フラッシュメッセージを定義し、詳細画面へリダイレクト
-      flash[:notice] = "投稿が成功しました"
+      flash[:notice] = "successfully"
       redirect_to book_path(@book.id)
     else
       @books = Book.all
@@ -23,9 +23,10 @@ class BooksController < ApplicationController
   end
 
 def destroy
-    book = Book.find(params[:id])  # データ（レコード）を1件取得
-    book.destroy  # データ（レコード）を削除
-    redirect_to '/books'  # 投稿一覧画面へリダイレクト
+  book = Book.find(params[:id])  # データ（レコード）を1件取得
+  book.destroy  # データ（レコード）を削除
+  flash[:notice] = "Book was successfully destroyed."
+  redirect_to '/books'  # 投稿一覧画面へリダイレクト
 end
 
   def show
@@ -40,7 +41,7 @@ end
     @book = Book.find(params[:id])
     @book.update(book_params)
     if @book.save
-      flash[:notice] = "投稿が成功しました"
+      flash[:notice] = "successfully"
       redirect_to book_path(@book.id)
     else
       render :edit
